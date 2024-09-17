@@ -24,7 +24,7 @@ void reflect(
       reflected[reverse_start + j] = input[pixel_start + j]; 
     }
     // Increment row when it hits multiple of width
-    if ((i % width) == 0)
+    if (i > 0 && (i % width) == 0)
       curr_row++;
   }
   ////////////////////////////////////////////////////////////////////////////

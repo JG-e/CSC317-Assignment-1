@@ -29,7 +29,7 @@ void rotate(
       rotated[curr_rotate + channel] = input[curr_input + channel];
     }
     // Once reaches the end of the row, update the row
-    if ((i % width) == 0) { 
+    if (i > 0 && (i % width) == 0) { 
       curr_row++;
     }
   }
