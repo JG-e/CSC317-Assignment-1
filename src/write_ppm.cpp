@@ -18,6 +18,9 @@ bool write_ppm(
   int len = width * height;
   ofstream f; 
   f.open(filename);
+  if (!f.is_open()) { 
+    return false;
+  }
   // Write header number according to the file format
   if (p2orp3) {
     f << "P3" << endl;
