@@ -16,7 +16,8 @@ void rgb_to_gray(
   Assuming rgb and gray have the same dimensions in pixels
   */ 
   for (int i = 0; i < len; i++) {
-    gray[i] = 0.2126 * rgb[i] + 0.7152 * rgb[i+1] + 0.0722 * rgb[i+2];
+    int rgb_i = 3 * i;
+    gray[i] = 0.2126 * rgb[rgb_i] + 0.7152 * rgb[rgb_i+1] + 0.0722 * rgb[rgb_i+2];
   }
   ////////////////////////////////////////////////////////////////////////////
 }
