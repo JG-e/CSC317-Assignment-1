@@ -1,5 +1,6 @@
 #include "demosaic.h"
-
+std::vector<int> get_neighbours(int index, int width, int height);
+void increment_and_plus(int& num, int& val, std::vector<int> increment_vals);
 void demosaic(
   const std::vector<unsigned char> & bayer,
   const int & width,
@@ -75,9 +76,10 @@ void demosaic(
     }
 
     // Assign the recovered rgb values back to rgb
-    rgb[pixel] = r_val;
-    rgb[pixel + 1] = g_val; 
-    rgb[pixel + 2] = b_val;
+    int rgb_pixel = pixel * 3;
+    rgb[rgb_pixel] = r_val;
+    rgb[rgb_pixel + 1] = g_val; 
+    rgb[rgb_pixel + 2] = b_val;
     }
   }
   ////////////////////////////////////////////////////////////////////////////
