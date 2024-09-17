@@ -32,7 +32,9 @@ bool write_ppm(
   for (int i = 0; i < len; i++) {
       f << data[i] << " ";
     if ((i * num_channels) % width == 0)
-      f << endl; // makes sure it is nicely printed for visibility
+      f << endl; // makes sure it is nicely printed for visibility, 
+      // but for the file format itself it doesn't matter.
   }
-  
+  f.close();
+  return true;
 }
