@@ -35,11 +35,14 @@ bool write_ppm(
   for (int i = 0; i < len; i++) {
     if (!p2orp3){
       int j = i*3;
-      f << +(data[j]) << ' ' << +data[j+1] << ' ' << +data[j+2] << endl;
+      f << +(data[j]) << ' ' << +data[j+1] << ' ' << +data[j+2] << ' ';
+      // f << +(data[j]) << ' ' << +data[j+1] << ' ' << +data[j+2] << endl;
     }
     else{ 
       f << +data[i] << endl;
       }
+    if (i > 0 && i % width == 0)
+      f << endl;
   }
   f.close();
   return true;
