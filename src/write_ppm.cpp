@@ -39,9 +39,9 @@ bool write_ppm(
       // f << +(data[j]) << ' ' << +data[j+1] << ' ' << +data[j+2] << endl;
     }
     else{ 
-      f << +data[i] << endl;
+      f << +data[i] << ' ';
       }
-    if (i > 0 && i % width == 0)
+    if (i > 0 && (i + 1) % width == 0)
       f << endl;
   }
   f.close();
