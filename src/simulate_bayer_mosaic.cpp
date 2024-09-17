@@ -14,22 +14,19 @@ void simulate_bayer_mosaic(
   for the odd row, and Red, Green, Red, Green, ... for the even row
   */
 
-  // Keep track of the row 
-  int curr_row = 1;
-  int len = width * height;
-  for (int i = 0; i < len; i++) {
-    int rgb_i = i * 3;
-  // If row # is odd, then go with GBGB...
-    if (curr_row % 2 == 1) {
-      bayer[i] = i % 2 == 0 ? rgb[rgb_i + 1] : rgb[rgb_i + 2];
+  for (int i = 0; i < height; i++) {
+    for (int j = 0; j < width; j++) {
+      int curr_i = (i * width + j);
+      int rgb_i = curr_i * 3;
+    // If row # is even, then go with GBGB...
+      if (i % 2 == 0) {
+        bayer[curr_i] = j % 2 == 0 ? rgb[rgb_i + 1] : rgb[rgb_i + 2];
+      }
+    // If row # is odd, then RGRG...
+      else {
+        bayer[curr_i] = j % 2 == 0 ? rgb[rgb_i] : rgb [rgb_i + 1];
+      }
     }
-  // If row # is even, then RGRG...
-    else {
-      bayer[i] = i % 2 == 0 ? rgb[rgb_i] : rgb [rgb_i + 1];
-    }
-  // Increment row if i is multiple of width
-    if (i > 0 && (i % width) == 0)  
-      curr_row++;
   }
   ////////////////////////////////////////////////////////////////////////////
 }
