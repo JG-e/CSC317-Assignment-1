@@ -14,7 +14,7 @@ bool write_ppm(
     (num_channels == 3 || num_channels ==1 ) &&
     ".ppm only supports RGB or grayscale images");
   using namespace std;
-  unsigned char p2orp3 = (num_channels == 3) ? 0 : 1; // a flag showing if p2 or p3, 0 as p2, 1 as p3;
+  unsigned char p2orp3 = (num_channels == 3) ? 0 : 1; // a flag showing if p2 or p3, 0 as p3, 1 as p2;
   int len = width * height;
   ofstream f; 
   f.open(filename);
@@ -22,21 +22,24 @@ bool write_ppm(
     return false;
   }
   // Write header number according to the file format
-  if (p2orp3) {
+  if (!p2orp3) {
     f << "P3" << endl;
   } 
   else { 
     f << "P2" << endl;
   }
   // width and height according to the protocol
-  f << width << " " << height << endl;
+  f << width << ' ' << height << endl;
   // set up max value
   f << 255 << endl; 
   for (int i = 0; i < len; i++) {
-      f << data[i] << " ";
-    if ((i * num_channels) % width == 0)
-      f << endl; // makes sure it is nicely printed for visibility, 
-      // but for the file format itself it doesn't matter.
+    if (!p2orp3){
+      int j = i*3;
+      f << +(data[j]) << ' ' << +data[j+1] << ' ' << +data[j+2] << endl;
+    }
+    else{ 
+      f << +data[i] << endl;
+      }
   }
   f.close();
   return true;
