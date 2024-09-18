@@ -12,24 +12,35 @@ void rgb_to_hsv(
   double & v)
 {
   ////////////////////////////////////////////////////////////////////////////
-  double M = max({r,g,b});
-  double m = min({r,g,b});
-  double C = M - m; 
+  double r_prime = r / 255.0;
+  double g_prime = g / 255.0;
+  double b_prime = b / 255.0;
 
-  double hp; 
+  double cmax = max({r_prime, g_prime, b_prime});
+  double cmin = min({r_prime, g_prime, b_prime});
+  double diff = cmax - cmin;
 
-  if (C == 0)
-    hp = -1; // not defined
-  else if (M == r)
-    hp = fmod((g-b)/C, 6);
-  else if (M == g)
-    hp = (b-r) / C + 2; 
-  else if (M == b) 
-    hp = (r-g) / C + 4;
-  
-  h = 60 * hp;
-  v = M;
-  s = v == 0 ? 0 : C / v;
-  
+  // Compute H
+  if (diff == 0) {
+    h = 0;
+  }
+  else if (cmax == r_prime)
+  {
+    h = 60.0 * (0.0 + ((g_prime - b_prime) / diff));
+  }
+  else if (cmax == g_prime)
+  {
+    h = 60.0 * (2.0 + ((b_prime - r_prime) / diff));
+  }
+  else if (cmax == b_prime)
+  {
+    h = 60.0 * (4.0 + ((r_prime - g_prime) / diff));
+  }
+
+  // Compute S
+  s = (cmax != 0) ? diff / cmax : 0.0;
+
+  // Compute V
+  v = cmax; 
   ////////////////////////////////////////////////////////////////////////////
 }

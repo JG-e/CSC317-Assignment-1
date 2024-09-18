@@ -18,13 +18,9 @@ void hue_shift(
     rgb_to_hsv(rgb[i], rgb[i+1], rgb[i+2], h, s, v);
     h = abs(fmod(h + shift, 360));
     hsv_to_rgb(h, s, v, r, g, b); 
-    shifted[i] = cast_rgb(r); 
-    shifted[i+1] = cast_rgb(g);
-    shifted[i+2] = cast_rgb(b);
+    shifted[i] = r; 
+    shifted[i+1] = g;
+    shifted[i+2] = b;
   }
   ////////////////////////////////////////////////////////////////////////////
-}
-
-unsigned char cast_rgb(double val) {
-  return (unsigned char) (val * 255);
 }
